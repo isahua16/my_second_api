@@ -40,7 +40,6 @@ LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
 INSERT INTO `employee` VALUES
 (1,'Employee 1','Sales','2023-06-07',34.24),
-(2,'Employee 2','Human Resources','2023-06-07',35.00),
 (3,'Employee 3','Manager','2023-06-07',45.00),
 (4,'Employee 4','Producer','2023-06-07',35.00),
 (5,'Employee 5','Sales','2023-06-07',28.00),
@@ -80,7 +79,6 @@ INSERT INTO `item` VALUES
 (7,'Item 7','This is a fake description','2023-06-07',9.99),
 (8,'Item 8','This is a fake description','2023-06-07',18.99),
 (9,'Item 9','This is a fake description','2023-06-07',5.99),
-(13,'New Item','This is new description','2023-06-07',20),
 (14,'New Item','This is new description','2023-06-07',20),
 (15,'New Item','This is new description','2023-06-07',20),
 (16,'New Item','This is new description','2023-06-07',19.95);
@@ -148,6 +146,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_employee`(id_input int(10) u
     MODIFIES SQL DATA
 BEGIN
 	DELETE FROM employee WHERE id = id_input;
+	SELECT ROW_COUNT();
 	COMMIT;
 END ;;
 DELIMITER ;
@@ -169,6 +168,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_item`(id_input int)
     MODIFIES SQL DATA
 BEGIN
 	DELETE FROM item where id = id_input;
+	SELECT ROW_COUNT();
 	COMMIT;
 END ;;
 DELIMITER ;
@@ -268,4 +268,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-08 16:41:10
+-- Dump completed on 2023-06-08 16:52:26

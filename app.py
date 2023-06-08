@@ -39,8 +39,11 @@ def update_price():
 @app.delete('/api/item')
 def delete_item():
     id = request.json.get('item_id')
-    run_statement('CALL delete_item(?)', [id])
-    return 'Item Successfully Deleted'
+    results = run_statement('CALL delete_item(?)', [id])
+    if(results[0][0] == 0):       
+        return 'item id does not exist'
+    else:
+        return 'Deleted item succesfully'
 
 @app.post('/api/employee')
 def create_employee():
@@ -78,7 +81,10 @@ def update_wage():
 @app.delete('/api/employee')
 def delete_employee():
     id = request.json.get('employee_id')
-    run_statement('CALL delete_employee(?)', [id])
-    return 'Employee Successfully Deleted'
-
+    results = run_statement('CALL delete_employee(?)', [id])
+    if(results[0][0] == 0):       
+        return 'Employee id does not exist'
+    else:
+        return 'Deleted employee succesfully'
+        
 app.run(debug=True)
